@@ -1,7 +1,7 @@
 {{
     config(
         materialized='incremental',
-        unique_key='id'
+        unique_key='order_id'
     )
 }}
 
@@ -22,7 +22,7 @@ with extracted as (
         {{ ref('stg_book_orders') }}
     where
         true
-        {{ filter_latest(order_date, order_date, date) }}
+        {{ filter_latest('order_date', 'order_date', 'date') }}
 ),
 /*
 extracting json fields in json_field to individual columns
