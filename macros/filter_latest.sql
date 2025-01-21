@@ -1,5 +1,7 @@
 {% macro filter_latest(source_column, target_column, date_type) %}
 {# this macro is used for incremental filter to only fetch the latest data from the upstream model based on this #}
+{# to run a specific model using backload, execute command as follows #}
+{# " dbt run -m model_name --vars '{'backload': True, 'date_start': '2025-01-01', 'date_until': '2025-01-01'}' " #}
 {% if not target_column -%}
     {# if target_column not set, then take from source_column #}
     {% set target_column = source_column %}
